@@ -18,17 +18,21 @@ mostrar:
 */
 function mostrar()
 {
+	/*
 	var nombre;
 	var edad;
 	var sexo;
 	var contador;
-	var cantidad;
 	var contadorMayoresDeEdad;
 	var contadorMenoresDeEdad;
 	var contadorMujeres;
 	var contadorHombres;
 
 	contador=0;
+	contadorMujeres=0;
+	contadorHombres=0;
+	contadorMenoresDeEdad=0;
+	contadorMayoresDeEdad=0;
 
 	while(contador<3)
 	{
@@ -38,11 +42,15 @@ function mostrar()
 		while(sexo!="f"&&sexo!="m")
 		{
 			sexo=prompt("Error. Ingrese su sexo");
-			
+			if(sexo=="f")
+			{
+				contadorMujeres++;
+			}
+			if(sexo=="m")
+			{
+				contadorHombres++;
+			}
 		}
-
-		
-
 
 		edad=parseInt(prompt("Ingrese su edad"));
 		while(edad<0||edad>100)
@@ -51,23 +59,15 @@ function mostrar()
 		
 		//analisis
 
-			if (edad>18)
+			if (edad>17)
 			{
 				contadorMayoresDeEdad++;
 			}
 
-			if(edad<18)
+			else
 			{
 				contadorMenoresDeEdad++;
-			}	
-		}
-		if(sexo=="f")
-		{
-			contadorMujeres++;
-		}
-		if(sexo=="m")
-		{
-			contadorHombres++;
+			}
 		}
 	}
 	//mas acciones
@@ -76,8 +76,99 @@ function mostrar()
 
 
 	//mostrar
+	document.write("<br> La cantidad de mujeres es: "+contadorMujeres);
+	document.write("<br> La cantidad de hombres es: "+contadorHombres);
 	document.write("<br> La cantidad de mayores es: "+contadorMayoresDeEdad);
 	document.write("<br> La cantidad de manores es: "+contadorMenoresDeEdad);
+*/
+	var nombre;
+	var edad;
+	var sexo;
+	var contador=0;
+
+	var contadorMayoresDeEdad=0;
+	var contadorMenoresDeEdad=0;
+	var contadorMujeres=0;
+	var contadorHombres=0;
+
+	var mayorEdad;
+	var menorEdad;
+	var edadHombreMenor;
+
+	var nombreMayor;
+	var nombreMenor;
+	var nombreHombreMenor;
+	var flag=0;
+
+	while(contador<3)
+	{
+		contador++;
+
+		nombre=prompt("Ingrese nombre");
+		edad=parseInt(prompt("Ingrese edad"));
+		sexo=prompt("Ingrese sexo: f o m");
+		sexo=sexo.toLowerCase()
+		
+
+		while(edad<0||edad>100||edad==NaN)
+		{
+			edad=parseInt(prompt("Error. Ingrese su edad"));
+
+			if(edad<17)
+			{
+				contadorMenoresDeEdad++;
+			}
+			else
+			{
+				contadorMayoresDeEdad++;
+			}
+		}	
+		
+		while(sexo!="f"&&sexo!="m")
+		{
+			sexo=prompt("Error. Ingrese su sexo");
+		}
+		if(sexo=='m')
+		{
+			contadorHombres++;
+		}
+		else
+		{
+			contadorMujeres++;
+		}
+		if(edad>mayorEdad||flag==0)
+		{
+			mayorEdad=edad;
+			nombreMayor=nombre;
+		}
+
+		if(edad<menorEdad||flag==0)
+		{
+			menorEdad=edad;
+			nombreMenor=nombre;
+			flag=1
+		}
+
+		if(sexo=='m'&&contadorHombres==1)
+		{
+			nombreHombreMenor=nombre;
+			edadHombreMenor=edad;
+		}
+	}
+
+	//mostrar
+	document.write("<br> La cantidad de mayores de edad es: "+contadorMayoresDeEdad);
+	document.write("<br> La cantidad de manores de edad es: "+contadorMenoresDeEdad);
+	document.write("<br> La cantidad de hombres es: "+contadorHombres);
+	document.write("<br> La cantidad de mujeres es: "+contadorMujeres);
+	document.write("<br> El nombre de la persona con mayor edad es: "+nombreMayor);
+	document.write("<br> El nombre de la persona con mayor edad es: "+nombreMenor);
+	
+	if(contadorHombres==0)
+	{
+		nombreHombreMenor="No se ingreso ningun hombre";
+	}
+	document.write("<br> El nombre del hombre menor de edad es: "+nombreHombreMenor);
 
 
 }
