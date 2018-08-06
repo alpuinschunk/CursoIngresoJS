@@ -4,108 +4,109 @@ function mostrar()
 Realizar el algoritmo que permita ingresar el nombre de un animal del zoológico, el peso el cual debe ser 
 entre 1 y 1000 y la temperatura del hábitat (entre -30 y 30) hasta que el usuario quiera e informar al 
 terminar el ingreso por document.write: 
-a) La cantidad de temperaturas pares. 
+a) La cantidad de temperaturas pares.  listo
 b) El nombre y temperatura del animal más pesado 
-c) La cantidad de animales que viven a menos de 0 grados. 
-d) El promedio del peso de todos los animales.	
+c) La cantidad de animales que viven a menos de 0 grados.  listo
+d) El promedio del peso de todos los animales.	listo
 f) El peso máximo y el mínimo de todos los animales cuyas temperaturas sean bajo cero.*/
 
-	var nombreAnimal;
+	var nombre;
 	var peso;
 	var temperatura;
 	var respuesta;
-
-	var cantTemperaturaPar;
-	var animalMasPesado;
-	var nombreAnimalPesado;
-	var	temperaturaAnimalPesado;
-	var cantAnimalesBajaTemperatura;
-	var bandera;
-	var animalMenosPesado;
-	var nombreMenosPesado;
-	var temperaturaMenosPesado;
-	var acumulador;
 	var contador;
-	var pesoMaximoBajoCero;
-	var pesoMinimoBajoCero;
-
+	var cantTemperaturaPar;
+	var cantAnimalesBajoCero;
+	var acumuladorPeso;
+	var pesoMayorBajoCero;
+	var pesoMenorBajoCero;
+	var masPesado;
+	var masPesadoNombre;
+	var masPesadoTemp;
 
 	respuesta='si';
 	contador=0;
 	cantTemperaturaPar=0;
-	cantAnimalesBajaTemperatura=0;
-	bandera=0;
-	acumulador=0;
+	cantAnimalesBajoCero=0;
+	acumuladorPeso=0;
+
 
 	while(respuesta=='si')
 	{
 		contador++;
-
-		nombreAnimal=prompt("Ingrese el nombre del animal");
+		nombre=prompt("Ingrese el nombre del animal");
 
 		peso=prompt("Ingrese el peso del animal");
 		peso=parseInt(peso);
 
-		while(peso<1 || peso>1000)
+		while(peso<1||peso>1000)
 		{
-			peso=prompt("Peso incorrecto. Reingrese el peso del animal");
+			peso=prompt("Peso invalido. Reingrese el peso del animal");
 			peso=parseInt(peso);
 		}
-		
+
 		temperatura=prompt("Ingrese la temperatura del hábitat");
 		temperatura=parseInt(temperatura);
 
 		while(temperatura<-30||temperatura>30)
 		{
-			temperatura=prompt("Temperatura incorrecta. Reingrese la temperatura del hábitat");
+			temperatura=prompt("Temperatura invalida. Reingrese la temperatura del hábitat");
 			temperatura=parseInt(temperatura);
 		}
-		
+
 		if(temperatura%2==0)
 		{
 			cantTemperaturaPar++;
 		}
 
-		if(peso>animalMasPesado||bandera==0)
+		if(contador==1)
 		{
-			animalMasPesado=peso;
-			nombreAnimalPesado=nombreAnimal;
-			temperaturaAnimalPesado=temperatura;
+			masPesado=peso;
+			masPesadoNombre=nombre;
+			masPesadoTemp=temperatura;
+		}
+		else
+		{
+			if (peso>masPesado)
+			{
+				masPesado=peso;
+				masPesadoNombre=nombre;
+				masPesadoTemp=temperatura;
+			}
 		}
 
 		if(temperatura<0)
 		{
-			cantAnimalesBajaTemperatura++;
-			
-			if(cantAnimalesBajaTemperatura==1)
+			cantAnimalesBajoCero++;
+
+			if(cantAnimalesBajoCero==1)
 			{
-				pesoMaximoBajoCero=peso;
-				pesoMinimoBajoCero=peso;
+				pesoMenorBajoCero=peso;
+				pesoMayorBajoCero=peso;
 			}
 			else
 			{
-				if(peso<pesoMinimoBajoCero)
+				if(peso<pesoMenorBajoCero)
 				{
-					pesoMinimoBajoCero=peso;
+					pesoMenorBajoCero=peso;
 				}
-				if(peso>pesoMaximoTempCero)
+				if(peso>pesoMayorBajoCero)
 				{
-					pesoMaximoBajoCero=peso;
+					pesoMayorBajoCero=peso;
 				}
 			}
 		}
 
-		acumulador=acumulador+peso;
-		respuesta=prompt("¿Desea continuar ingresando datos? (si/no)");
+
+		acumuladorPeso=acumuladorPeso+peso;
+		respuesta=prompt("¿Desea continuar ingresando? (si/no)");
 		respuesta=respuesta.toLowerCase();
 	}
-
-	promedio=acumulador/contador;
+	promedio=acumuladorPeso/contador;
 
 	document.write("<br> La cantidad de temperaturas pares es "+cantTemperaturaPar);
-	document.write("<br> El nombre del animal más pesado es "+nombreAnimalPesado+" y su temperatura es "+temperaturaAnimalPesado);
-	document.write("<br> La cantidad de animales que viven a menos de 0 grados es "+cantAnimalesBajaTemperatura);
+	document.write("<br> El nombre del animal más pesado es "+masPesadoNombre+" y su temperatura es "+masPesadoTemp);
+	document.write("<br> La cantidad de animales que viven a menos de 0 grados es "+cantAnimalesBajoCero);
 	document.write("<br> El promedio del peso de todos los animales es "+promedio);
-	document.write("<br> El peso máximo  de todos los animales cuyas temperaturas sean bajo cero es "+pesoMaximoBajoCero+" y el mínimo es "+pesoMinimoBajoCero);
-
+	document.write("<br> El peso máximo de todos los animales cuyas temperaturas sean bajo cero es "+pesoMayorBajoCero+" y el mínimo es "+pesoMenorBajoCero);
 }
